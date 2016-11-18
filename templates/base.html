@@ -18,7 +18,14 @@
   
   <style>
     /* Remove the navbar's default rounded borders and increase the bottom margin */
-    
+  
+    .table {
+		border-collapse: collapse;
+    }
+
+    .td    {
+	  border-bottom: thin solid black;
+    }
     body {
   padding-top: 50px;
     }
@@ -58,7 +65,7 @@
             <a href="#" class='dropdown-toggle' data-toggle="dropdown">
             <span class="glyphicon glyphicon-zoom-in"></span> 搜索 <b class="caret"></b> </a>
             <ul class="dropdown-menu">
-                <li><a href="/dashboard/property/view"><span class="glyphicon glyphicon-home"></span> 商业载体</a></li>
+                <li><a href="/dashboard/property/view/"><span class="glyphicon glyphicon-home"></span> 商业载体</a></li>
                 <li><a href="/dashboard/availability/view"><span class="glyphicon glyphicon-list-alt"></span> 可交易库存</a></li>
                 <li><a href="/dashboard/tenant/view"><span class="glyphicon glyphicon-list-alt"></span> 租户</a></li>
             </ul>

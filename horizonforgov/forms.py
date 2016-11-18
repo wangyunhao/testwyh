@@ -3,6 +3,9 @@ from django import forms
 from django.contrib.auth.models import User
 from bootstrap_toolkit.widgets import BootstrapDateInput, BootstrapTextInput, BootstrapUneditableInput
 from models import Property, Availability, Tenant
+from collections import OrderedDict
+from django.forms import ModelForm
+
 
 class LoginForm(forms.Form):
     username = forms.CharField(
@@ -32,38 +35,42 @@ class LoginForm(forms.Form):
         else:
             cleaned_data = super(LoginForm, self).clean()
             
+                
+                
+    
+
             
-class PropertyForm(forms.Form):
+class PropertyForm(ModelForm):
     class Meta:
         model = Property
-        only = ['NameUnicode', 'Name', 'VacancyRatio', 'AvailabilityCount',
+        fields = ['NameUnicode', 'VacancyRatio', 'AvailabilityCount',
             'RentableBuildingArea', 'GradeCode',
             'StreetNameUnicode', 'StreetFrom', 'SubmarketCluster',
             'YearBuilt', 
             'Latitude', 'Longitude', 'Type',  'EfficiencyPercent', 
             'StoryCount', 'TypicalFloorSize',
-            'YearRenovated', 'CeilingHeightRange', 'DriverIns', 'ParkingRatio', 
+            'YearRenovated', 'CeilingHeightRange', 'CarParking', 'ParkingRatio', 
             'LandArea', 'PropertyTypeName', 'BuildingTypeName', 'MetroLinkage',
-            'Positioning', 'AreaRetail']
+            'Positioning']
             
-    _field_order = ['NameUnicode', 'Name', 'VacancyRatio', 'AvailabilityCount',
+        field_order = ['NameUnicode', 'VacancyRatio', 'AvailabilityCount',
             'RentableBuildingArea', 'GradeCode',
             'StreetNameUnicode', 'StreetFrom', 'SubmarketCluster',
             'YearBuilt', 
             'Latitude', 'Longitude', 'Type',  'EfficiencyPercent', 
             'StoryCount', 'TypicalFloorSize',
-            'YearRenovated', 'CeilingHeightRange', 'DriverIns', 'ParkingRatio', 
+            'YearRenovated', 'CeilingHeightRange', 'CarParking', 'ParkingRatio', 
             'LandArea', 'PropertyTypeName', 'BuildingTypeName', 'MetroLinkage',
-            'Positioning', 'AreaRetail', 'Photo', 'PDF']
-    
-    Image = FileField(u'上传载体图片',validators=[
-        FileAllowed(['jpg', 'png', 'gif'], 'Images only!')
-    ])
-    Document = FileField(u'上传载体资料文档',validators=[
-        FileAllowed(['pdf'], 'PDFs only!')
-    ])
-    
-    def __init__(self, *args, **kwargs):
+            'Positioning']
+
+#    Image = FileField(u'上传载体图片',validators=[
+#        FileAllowed(['jpg', 'png', 'gif'], 'Images only!')
+#    ])
+#    Document = FileField(u'上传载体资料文档',validators=[
+#        FileAllowed(['pdf'], 'PDFs only!')
+#    ])
+ 
+'''    def __init__(self, *args, **kwargs):
         super(PropertyForm, self).__init__(*args, **kwargs)
         field_order = getattr(self, '_field_order')
         visited = []
@@ -78,8 +85,8 @@ class PropertyForm(forms.Form):
                     continue
                 new_fields[field_name] = self._fields[field_name]
             self._fields = new_fields  
-        
-
+'''      
+'''
 class AvailabilityForm(ModelForm):
     class Meta:
         model = Availability
@@ -93,3 +100,6 @@ class TenantForm(ModelForm):
         model = Tenant
         only = ['TenantName', 'TenantType', 'TenantStatus', 'TenantProperty', 'TenantStartDate1', 'TenantStartDate2', 'TenantStock','PhoneNumber',
                 'ContactorName', 'ContactorPhone', 'ContactorPosition', 'Description']
+                
+                
+'''

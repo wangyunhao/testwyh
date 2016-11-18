@@ -29,6 +29,13 @@ ALLOWED_HOSTS = []
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
+
+# Disable login session after browser close
+SESSION_EXPIRE_AT_BROWSER_CLOSE=True;
+
+
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'horizonforgov',
     'bootstrap_toolkit',
+    'pagination',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -51,6 +59,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'pagination.middleware.PaginationMiddleware',
 ]
 
 ROOT_URLCONF = 'horizon.urls'

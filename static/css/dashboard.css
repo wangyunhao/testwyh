@@ -139,3 +139,11 @@ div.subitem a.list-group-item {
 .img-responsive {
     margin: 0 auto;
 }
+
+.table {
+		border-collapse: collapse;
+}
+
+.td    {
+	  border-bottom: thin solid black;
+}
