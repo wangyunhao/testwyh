@@ -23,7 +23,8 @@ admin.autodiscover()
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/login/',  views.login),
-#    url(r'^',  views.login),
-    url(r'^dashboard', views.dashboard),
+    url(r'^dashboard/$', views.dashboard),
     url(r'^accounts/logout/', views.logout),
+    url(r'^dashboard/property/view/', views.view_property),
+    url(r'^dashboard/property/add/', views.add_property),
 ]

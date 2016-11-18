@@ -12,7 +12,7 @@ class Property(models.Model):
     DocumentId = models.CharField(max_length=255)
     #Name = models.CharField(models.NVARCHAR(255), '名称(EN)')
     NameUnicode = models.CharField('载体名称', max_length=255, unique=True, null=False) 
-    GradeCode = models.CharField( '级别定位', max_length=10, default="") 
+    GradeCode = models.CharField( '级别定位', max_length=10, default="", blank=True, null=True) 
     #SubmarketId = models.CharField(models.Integer)
     #MarketId = models.CharField(models.Integer)
     #ParentMarketId = models.CharField(models.Integer)
@@ -40,7 +40,7 @@ class Property(models.Model):
     Type = models.CharField('类型', max_length=255, default="")
     VacancyRatio = models.CharField('空置率', max_length=255)
     EfficiencyPercent = models.CharField('得房率', max_length=255)
-    AvailabilityCount = models.IntegerField('可租赁单元数量', max_length=255)
+    AvailabilityCount = models.IntegerField('可租赁单元数量')
     UpdateDate = models.DateField('更新时间', auto_now=True)
     StoryCount = models.CharField('总楼层', max_length=255)
     RentableBuildingArea = models.CharField('可租赁总面积', max_length=255)
@@ -68,7 +68,7 @@ class Property(models.Model):
     #MicroMarketId = models.CharField(models.Integer)
     
     def __unicode__(self): 
-        return self.name
+        return self.NameUnicode
     
 class Availability(models.Model):
     __tablename__ = 'availability'
@@ -95,7 +95,7 @@ class Availability(models.Model):
     #StatusName = models.CharField(models.NVARCHAR(255))
     
     def __unicode__(self): 
-        return self.name
+        return self.Property
     
 class Tenant(models.Model):
     __tablename__ = 'tenant'
@@ -115,4 +115,13 @@ class Tenant(models.Model):
     Description = models.CharField('备注', max_length=255)
     
     def __unicode__(self): 
-        return self.name
+        return self.Property
+
+class PropertyImage(models.Model):
+    __tablename__= 'propertyimage'
+    Property = models.ForeignKey(Property, verbose_name='所属载体')
+    Image = models.FileField(upload_to = './upload/')
+   
+    def __unicode__(self): 
+        return self.Property
+ 

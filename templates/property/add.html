@@ -6,13 +6,12 @@
 
   <h1 class="page-header">添加地产载体</h1>
   
-  {% from "/util/_formhelpers.html" import render_field, display_message %}
-  
-  {{ display_message() }}
   
   <form method='POST' enctype='multipart/form-data'>
+     {% csrf_token %}
     {% for field in form %}
-      {{ render_field(field) }}
+  {{ field.label_tag }}:{{ field }} 
+  {{ field.errors }}
     {% endfor %}
     <button type="submit" class="btn btn-primary">提交</button>
     <input class="btn btn-default" type="button" onclick="history.back();" value="取消">

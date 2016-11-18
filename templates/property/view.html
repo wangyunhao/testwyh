@@ -1,13 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+{% load pagination_tags %}
+<div class="col-sm-offset-1 col-md-10 main">
   <h1 class="page-header">地产载体</h1>
     <form class="" role="search" method='GET'>
       <div class="form-group">
         <input name="search" type="text" class="form-control" placeholder="查找载体">
       </div>
     </form>
+    
+      {% autopaginate properties 1 %} 
   <table class="table table-bordered table-hover">
     <thead>
       <tr>
@@ -20,22 +23,28 @@
         <th>删除</th>
       </tr>
     </thead>
+
     <tbody data-link="row">
-      {% for property in properties.items %}
+      
+
+      {% for property in properties %}
       <tr>
         <th>{{property.NameUnicode}}</th>
         <th>{{property.AddressLine1}}</th>
         <th>{{property.RentableBuildingArea}}</th>
         <th class="fit"><a class="btn btn-default {% if not property.ImageId %}disabled{% endif %}" href="/dashboard/property/image/{{property.ImageId}}" data-remote="false" data-toggle="modal" data-target="#myModal" role="button">&nbsp;&nbsp;图片&nbsp;&nbsp;</a></th>
         <th class="fit"><a class="btn btn-default {% if not property.DocumentId %}disabled{% endif %}" href="/dashboard/property/doc/{{property.DocumentId}}" role="button">相关文档</a></th>
-        <th class="fit"><a class="btn btn-default" href="{{url_for('edit_property', iden=property.Id)}}" role="button">&nbsp;&nbsp;编辑&nbsp;&nbsp;</a></th>
-        <th class="fit"><form action="{{url_for('delete_property', iden=property.Id)}}" method="POST"><button class="btn btn-default" type="submit">&nbsp;&nbsp;删除&nbsp;&nbsp;</a></form></th>
-      </tr>
+        <th class="fit"><a class="btn btn-default" href="/" role="button">&nbsp;&nbsp;编辑&nbsp;&nbsp;</a></th> 
+        <th class="fit"><form action="" method="POST"><button class="btn btn-default" type="submit">&nbsp;&nbsp;删除&nbsp;&nbsp;</a></form></th>  
+      </tr>  
       {% endfor %}  
     </tbody>
+
   </table>
-  {% from "/util/_pagination.html" import render_pagination %}
-  {{render_pagination(properties, keyword)}}
+
+  {% paginate %}
+  
+
 
 </div>
 
