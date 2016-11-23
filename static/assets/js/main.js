@@ -289,7 +289,7 @@ head.js("/static/assets/js/clock/jquery.clock.js", function() {
 
 //------------------------------------------------------------- 
 
-head.js("/static/assets/js/gage/raphael.2.1.0.min.js", "/static/assets/js/gage/justgage.js", function() {
+head.js("/static/assets/js/gage/raphael.2.1.3.min.js", "/static/assets/js/gage/justgage.js", function() {
 
 
 
