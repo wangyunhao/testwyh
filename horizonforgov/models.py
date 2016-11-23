@@ -2,10 +2,27 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.forms import ModelForm 
+from django.contrib.auth.models import User, UserManager 
+from django.db.models.signals import post_save
 
 # Create your models here.
 
 # models.py
+#UserRole 
+class UserRole(models.Model):  
+    user = models.OneToOneField(User) 
+    userRole = models.CharField(max_length=255)
+    #description = models.TextField(max_length=51200)  
+    #scope = models.IntegerField(default=100)  
+
+def create_user_profile(sender, instance, created, **kwargs):  
+    if created:  
+       profile, created = UserRole.objects.get_or_create(user=instance)  
+  
+    post_save.connect(create_user_profile, sender=User)  
+    
+##############
 class Property(models.Model):
     __tablename__ = 'property'
     ImageId = models.CharField(max_length=255)

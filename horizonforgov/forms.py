@@ -7,6 +7,10 @@ from collections import OrderedDict
 from django.forms import ModelForm
 
 
+'''class PermForm(ModelForm):     
+    class Meta:         
+        model = Perm '''
+
 class LoginForm(forms.Form):
     username = forms.CharField(
         required=True,

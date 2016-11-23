@@ -21,6 +21,13 @@ from models import Property, Availability, Tenant
 
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 
+from models import UserRole
+################
+#userDemo
+def userrole(request):  
+    desc = User.objects.all()[0].get_profile().description  
+    return HttpResponse(desc) 
+
 
 #Expand Redirct Here
 def index(request):
