@@ -15,6 +15,7 @@ from django.core.urlresolvers import reverse
 from bootstrap_toolkit.widgets import BootstrapUneditableInput
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.template.loader import get_template
 
 from forms import LoginForm, PropertyForm
 from models import Property, Availability, Tenant
@@ -40,7 +41,7 @@ def login(request):
 
     if request.method == 'GET':
         if request.user.is_authenticated():
-            return render_to_response('base.html', RequestContext(request))
+            return render_to_response('#.html', RequestContext(request))
         else:
             form = LoginForm()
             return render_to_response('user/login.html', RequestContext(request, {'form': form,}))
@@ -52,7 +53,7 @@ def login(request):
             user = auth.authenticate(username=username, password=password)
             if user is not None and user.is_active:
                 auth.login(request, user)
-                return render_to_response('base.html', RequestContext(request))
+                return render_to_response('#.html', RequestContext(request))
             else:
                 return render_to_response('user/login.html', RequestContext(request, {'form': form,'password_is_wrong':True, 'errors': u'登录失败，请检查登录信息'}))
         else:
@@ -62,7 +63,7 @@ def login(request):
  
 @login_required          
 def dashboard(request):
-    return render_to_response('base.html')
+    return render_to_response('#.html')
 
 
 def logout(request):
@@ -99,7 +100,7 @@ def view_property(request):
     properties = properties.order_by('NameUnicode')
     
     return render_to_response('property/view.html', {'properties': properties}, context_instance = RequestContext(request))    
-'''    page_properties=Paginator(properties,limit)
+'''    page_properties=Paginator(properties,limit)s
     page_properties_review=Paginator(properties,limit)
     page=request.GET.get('page')
     table=request.GET.get('table','none')

@@ -1,6 +1,7 @@
 
 
 <!DOCTYPE html>
+
 <html>
 <head>
     <style> 
@@ -62,7 +63,7 @@
 
 
     <form method='POST' name='login'>
-        {% csrf_token %}
+
         <div class="centered">
             <div style="margin: auto 30px">
                 <h2 class="form-signin-heading" align="center" ><font color="#FFFFFF" size="6">杨浦商务载体管理平台</font></h2>
@@ -81,6 +82,7 @@
                     <div style="padding:7px 0px 15px 0px;font-size:14px;">
        
                         <div style="margin: 0px 0px 5px 0px;">欢迎登陆！   
+                                {% csrf_token %}
                         {% if input_is_wrong %}  
                             <a style="color: red;">  
                                {{errors}}
